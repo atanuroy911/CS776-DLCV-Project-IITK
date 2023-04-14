@@ -59,6 +59,7 @@ class Concat(nn.Module):
         self.d = dimension
 
     def forward(self, x):
+        # print(self.d)
         return torch.cat(x, self.d)
 
 
@@ -102,9 +103,9 @@ class Conv(nn.Module):
         super(Conv, self).__init__()
         self.conv = nn.Conv2d(c1, c2, k, s, autopad(k, p), groups=g, bias=False)
         self.bn = nn.BatchNorm2d(c2)
-        # self.act = nn.SiLU() if act is True else (act if isinstance(act, nn.Module) else nn.Identity())
+        # self.act = nn.PReLU() if act is True else (act if isinstance(act, nn.Module) else nn.Identity())
         # self.act = nn.ReLU() if act is True else (act if isinstance(act, nn.Module) else nn.Identity())
-        self.act = nn.SiLU() if act is True else (act if isinstance(act, nn.Module) else nn.Identity())
+        self.act = nn.PReLU() if act is True else (act if isinstance(act, nn.Module) else nn.Identity())
 
     def forward(self, x):
         return self.act(self.bn(self.conv(x)))
@@ -526,7 +527,7 @@ class RepConv(nn.Module):
 
         padding_11 = autopad(k, p) - k // 2
 
-        self.act = nn.SiLU() if act is True else (act if isinstance(act, nn.Module) else nn.Identity())
+        self.act = nn.PReLU() if act is True else (act if isinstance(act, nn.Module) else nn.Identity())
 
         if deploy:
             self.rbr_reparam = nn.Conv2d(c1, c2, k, s, autopad(k, p), groups=g, bias=True)
@@ -810,6 +811,9 @@ class RepResXCSPC(ResXCSPC):
 
 
 ##### end of repvgg #####
+
+#### RepVGG Plus ######
+
 
 
 ##### transformer #####
@@ -1310,7 +1314,7 @@ class OREPA_3x3_RepConv(nn.Module):
 class RepConv_OREPA(nn.Module):
 
     def __init__(self, c1, c2, k=3, s=1, padding=1, dilation=1, groups=1, padding_mode='zeros', deploy=False,
-                 use_se=False, nonlinear=nn.SiLU()):
+                 use_se=False, nonlinear=nn.PReLU()):
         super(RepConv_OREPA, self).__init__()
         self.deploy = deploy
         self.groups = groups
@@ -1533,7 +1537,7 @@ class WindowAttention(nn.Module):
 
 class Mlp(nn.Module):
 
-    def __init__(self, in_features, hidden_features=None, out_features=None, act_layer=nn.SiLU, drop=0.):
+    def __init__(self, in_features, hidden_features=None, out_features=None, act_layer=nn.PReLU, drop=0.):
         super().__init__()
         out_features = out_features or in_features
         hidden_features = hidden_features or in_features
@@ -1570,7 +1574,7 @@ class SwinTransformerLayer(nn.Module):
 
     def __init__(self, dim, num_heads, window_size=8, shift_size=0,
                  mlp_ratio=4., qkv_bias=True, qk_scale=None, drop=0., attn_drop=0., drop_path=0.,
-                 act_layer=nn.SiLU, norm_layer=nn.LayerNorm):
+                 act_layer=nn.PReLU, norm_layer=nn.LayerNorm):
         super().__init__()
         self.dim = dim
         self.num_heads = num_heads
@@ -1981,7 +1985,7 @@ class WindowAttention_v2(nn.Module):
 
 
 class Mlp_v2(nn.Module):
-    def __init__(self, in_features, hidden_features=None, out_features=None, act_layer=nn.SiLU, drop=0.):
+    def __init__(self, in_features, hidden_features=None, out_features=None, act_layer=nn.PReLU, drop=0.):
         super().__init__()
         out_features = out_features or in_features
         hidden_features = hidden_features or in_features
@@ -2017,7 +2021,7 @@ class SwinTransformerLayer_v2(nn.Module):
 
     def __init__(self, dim, num_heads, window_size=7, shift_size=0,
                  mlp_ratio=4., qkv_bias=True, drop=0., attn_drop=0., drop_path=0.,
-                 act_layer=nn.SiLU, norm_layer=nn.LayerNorm, pretrained_window_size=0):
+                 act_layer=nn.PReLU, norm_layer=nn.LayerNorm, pretrained_window_size=0):
         super().__init__()
         self.dim = dim
         # self.input_resolution = input_resolution
