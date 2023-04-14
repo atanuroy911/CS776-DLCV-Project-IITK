@@ -11,10 +11,10 @@
 #path: ../datasets/coco128  # dataset root dir
 #train: images/train2017  # train images (relative to 'path') 128 images
 #val: images/train2017  # val images (relative to 'path') 128 images
-path: ../datasets/coco  # dataset root dir
+path: ../datasets/pipe  # dataset root dir
 train: images/train2021  # train images (relative to 'path') 128 images
 val: images/val2021  # val images (relative to 'path') 128 images
-test:  # test images (optional)
+test: images/test2021 # test images (optional)
 
 # Classes
 names:
