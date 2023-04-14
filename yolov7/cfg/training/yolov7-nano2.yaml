@@ -48,7 +48,9 @@ backbone:
   ]
 
 head:
-   [[-1, 1, Conv, [256, 1, 1, None, 1, nn.PReLU()]], #25
+   [[-1, 1, SPPCSPC, [512]], # 51
+   [-1, 1, Conv, [256, 1, 1, None, 1, nn.PReLU()]], #25
+   [-2, 1, Conv, [256, 1, 1, None, 1, nn.PReLU()]],
    [-1, 1, SP, [5]],
    [-2, 1, SP, [9]],
    [-3, 1, SP, [13]],
