@@ -620,15 +620,9 @@ def get_dwconv(dim, kernel, bias):
 class HorBlock(nn.Module):
     r""" HorNet block
     """
-<<<<<<< HEAD
     def __init__(self, dim, c2=None, drop_path=0., layer_scale_init_value=1e-6, gnconv=gnconv):
         super().__init__()
         # print(dim * layer_scale_init_value)
-=======
-    def __init__(self, dim, drop_path=0., layer_scale_init_value=1e-6, gnconv=gnconv):
-        super().__init__()
-
->>>>>>> 0d6ae9201e93b79cd14be84a79a7637397533ce1
         self.norm1 = HorLayerNorm(dim, eps=1e-6, data_format='channels_first')
         self.gnconv = gnconv(dim)
         self.norm2 = HorLayerNorm(dim, eps=1e-6)
@@ -646,13 +640,9 @@ class HorBlock(nn.Module):
     def forward(self, x):
         B, C, H, W  = x.shape # [512]
         if self.gamma1 is not None:
-<<<<<<< HEAD
             # print(C)
             gamma1 = self.gamma1.view(C, 1, 1)
             # print(gamma1)
-=======
-            gamma1 = self.gamma1.view(C, 1, 1)
->>>>>>> 0d6ae9201e93b79cd14be84a79a7637397533ce1
         else:
             gamma1 = 1
         x = x + self.drop_path(gamma1 * self.gnconv(self.norm1(x)))
