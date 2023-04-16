@@ -48,28 +48,28 @@ backbone:
   ]
 
 head:
-   [[-1, 1, SPPCSPC, [512]], # 28
-   [-1, 1, Conv, [256, 1, 1, None, 1, nn.PReLU()]], 
+   [ 
+   [-1, 1, Conv, [256, 1, 1, None, 1, nn.PReLU()]], # 28
    [-2, 1, Conv, [256, 1, 1, None, 1, nn.PReLU()]],
    [-1, 1, SP, [5]],
    [-2, 1, SP, [9]],
    [-3, 1, SP, [13]],
    [[-1, -2, -3, -4], 1, Concat, [1]],
-   [-1, 1, Conv, [256, 1, 1, None, 1, nn.PReLU()]], # 35
+   [-1, 1, Conv, [256, 1, 1, None, 1, nn.PReLU()]], # 34
    [[-1, -7], 1, Concat, [1]], 
    [-1, 1, Conv, [256, 1, 1, None, 1, nn.PReLU()]],  
 
    [-1, 1, Conv, [128, 1, 1, None, 1, nn.PReLU()]],
     
-  [-1, 1, nn.Upsample, [None, 2, 'nearest']], # 39
+  [-1, 1, nn.Upsample, [None, 2, 'nearest']], # 38
   [20, 1, Conv, [128, 1, 1, None, 1, nn.PReLU()]], # route backbone P4
-  [[-1, -2], 1, Concat, [1]], # 41
+  [[-1, -2], 1, Concat, [1]], # 40
 
   [-1, 1, Conv, [64, 1, 1, None, 1, nn.PReLU()]],
   [-2, 1, Conv, [64, 1, 1, None, 1, nn.PReLU()]],
   [-1, 1, Conv, [64, 3, 1, None, 1, nn.PReLU()]],
   [[-1, -2, -3], 1, Concat, [1]],
-  [-1, 1, Conv, [128, 1, 1, None, 1, nn.PReLU()]],  # 46
+  [-1, 1, Conv, [128, 1, 1, None, 1, nn.PReLU()]],  # 45
 
   [-1, 1, Conv, [128, 1, 1, None, 1, nn.PReLU()]],
   [-1, 1, nn.Upsample, [None, 2, 'nearest']],
@@ -80,30 +80,30 @@ head:
   [-2, 1, Conv, [32, 1, 1, None, 1, nn.PReLU()]],
   [-1, 1, Conv, [32, 3, 1, None, 1, nn.PReLU()]],
   [[-1, -2, -3], 1, Concat, [1]],
-  [-1, 1, Conv, [64, 1, 1, None, 1, nn.PReLU()]],  # 55
+  [-1, 1, Conv, [64, 1, 1, None, 1, nn.PReLU()]],  # 54
 
   [-1, 1, Conv, [128, 3, 2, None, 1, nn.PReLU()]],
-  [[-1, 46], 1, Concat, [1]],
+  [[-1, 45], 1, Concat, [1]],
 
   [-1, 1, Conv, [64, 1, 1, None, 1, nn.PReLU()]],
   [-2, 1, Conv, [64, 1, 1, None, 1, nn.PReLU()]],
   [-1, 1, Conv, [64, 3, 1, None, 1, nn.PReLU()]],
   [[-1, -2, -3], 1, Concat, [1]],
-  [-1, 1, Conv, [128, 1, 1, None, 1, nn.PReLU()]],  # 62
+  [-1, 1, Conv, [128, 1, 1, None, 1, nn.PReLU()]],  # 61
 
   [-1, 1, Conv, [256, 3, 2, None, 1, nn.PReLU()]],
-  [[-1, 37], 1, Concat, [1]],
+  [[-1, 36], 1, Concat, [1]],
 
   [-1, 1, Conv, [128, 1, 1, None, 1, nn.PReLU()]],
   [-2, 1, Conv, [128, 1, 1, None, 1, nn.PReLU()]],
   [-1, 1, Conv, [128, 3, 1, None, 1, nn.PReLU()]],
   [[-1, -2, -3], 1, Concat, [1]],
-  [-1, 1, Conv, [256, 1, 1, None, 1, nn.PReLU()]], # 69
+  [-1, 1, Conv, [256, 1, 1, None, 1, nn.PReLU()]], # 68
 
    
-   [55, 1, Conv, [128, 3, 1, None, 1, nn.PReLU()]],
-   [62, 1, Conv, [256, 3, 1, None, 1, nn.PReLU()]],
-   [69, 1, Conv, [512, 3, 1, None, 1, nn.PReLU()]],
+   [54, 1, Conv, [128, 3, 1, None, 1, nn.PReLU()]],
+   [61, 1, Conv, [256, 3, 1, None, 1, nn.PReLU()]],
+   [68, 1, Conv, [512, 3, 1, None, 1, nn.PReLU()]],
 
-   [[70, 71, 72], 1, IDetect, [nc, anchors]],   # Detect(P3, P4, P5)
+   [[69, 70, 71], 1, IDetect, [nc, anchors]],   # Detect(P3, P4, P5)
   ]

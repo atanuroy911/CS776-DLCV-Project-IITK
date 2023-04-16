@@ -1,7 +1,7 @@
 # parameters
 nc: 8  # number of classes
 depth_multiple: 0.33  # model depth multiple
-width_multiple: 0.25  # layer channel multiple
+width_multiple: 1.0  # layer channel multiple
 
 # anchors
 anchors:
@@ -44,7 +44,7 @@ backbone:
   [-1, 1, Conv, [256, 3, 1, None, 1, nn.PReLU()]],
   [[-1, -2, -3], 1, Concat, [1]],
   [-1, 1, Conv, [512, 1, 1, None, 1, nn.PReLU()]],  
-  [-1, 1, eca_layer, [512]], # 27
+  [-1, 1, HorBlock, [512]], # 27
   ]
 
 head:
