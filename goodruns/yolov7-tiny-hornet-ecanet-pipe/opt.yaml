@@ -1,8 +1,8 @@
 weights: weights/yolov7.pt
-cfg: cfg/training/yolov7-nano2-hornet-ecanet.yaml
+cfg: cfg/training/yolov7-hornet-ecanet.yaml
 data: data/custom.yaml
 hyp: data/hyp.scratch.tiny.yaml
-epochs: 200
+epochs: 300
 batch_size: 16
 img_size:
 - 640
@@ -25,7 +25,7 @@ local_rank: -1
 workers: 8
 project: runs/train
 entity: null
-name: yolov7-nano2-hornet-pipe
+name: yolov7-tiny-hornet-ecanet-pipe
 exist_ok: false
 quad: false
 linear_lr: false
@@ -39,5 +39,5 @@ freeze:
 v5_metric: false
 world_size: 1
 global_rank: -1
-save_dir: runs/train/yolov7-nano2-hornet-pipe10
+save_dir: runs/train/yolov7-tiny-hornet-ecanet-pipe7
 total_batch_size: 16
