@@ -141,6 +141,7 @@ def detect(save_img=False):
             if view_img:
                 cv2.imshow(str(p), im0)
                 cv2.waitKey(1)  # 1 millisecond
+                # Initialize FPS variables
                 fps_frame_count += 1
                 fps_current_time = time.time()
                 fps_elapsed_time = fps_current_time - fps_start_time
