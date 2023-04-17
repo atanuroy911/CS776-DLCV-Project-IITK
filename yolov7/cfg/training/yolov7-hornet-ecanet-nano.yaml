@@ -19,11 +19,13 @@ backbone:
   [-1, 1, Conv, [32, 3, 1, None, 1, nn.PReLU()]],
   [[-1, -2, -3], 1, Concat, [1]],
   [-1, 1, Conv, [64, 1, 1, None, 1, nn.PReLU()]],  
+
   [-1, 1, HorBlock, [64]],
   [-1, 1, Conv, [128, 1, 1, None, 1, nn.PReLU()]],  # 8
  
 
   [-1, 1, MP, []],  # 9-P3/8
+  
   [-1, 1, Conv, [64, 1, 1, None, 1, nn.PReLU()]],
   [-2, 1, Conv, [64, 1, 1, None, 1, nn.PReLU()]],
   [-1, 1, Conv, [64, 3, 1, None, 1, nn.PReLU()]],

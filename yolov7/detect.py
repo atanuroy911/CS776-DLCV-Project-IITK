@@ -141,6 +141,19 @@ def detect(save_img=False):
             if view_img:
                 cv2.imshow(str(p), im0)
                 cv2.waitKey(1)  # 1 millisecond
+                fps_frame_count += 1
+                fps_current_time = time.time()
+                fps_elapsed_time = fps_current_time - fps_start_time
+                if fps_elapsed_time >= 1.0:
+                    # Calculate FPS
+                    fps = fps_frame_count / fps_elapsed_time
+
+                    # Print FPS on the console
+                    print(f'FPS: {fps:.2f}')
+
+                    # Reset FPS variables
+                    fps_start_time = time.time()
+                    fps_frame_count = 0
 
             # Save results (image with detections)
             if save_img:
