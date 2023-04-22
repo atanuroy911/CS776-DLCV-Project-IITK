@@ -536,7 +536,7 @@ class HorLayerNorm(nn.Module):
         self.eps = eps
         self.data_format = data_format
         if self.data_format not in ["channels_last", "channels_first"]:
-            raise NotImplementedError # by iscyy/air
+            raise NotImplementedError 
         self.normalized_shape = (normalized_shape, )
     
     def forward(self, x):
